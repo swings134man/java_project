@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>게시판 글쓰기</title>
+</head>
+<body>
+<h4>게시판 글쓰기 화면</h4>
+<hr color="green">
+<form action="insert2.jsp">
+- 제목 : <input name="title" type="text"> <br>
+- 글쓴이 : <input name="peo" type="text"> <br>
+- 내용 : 
+		<textarea rows="10" cols="30" placeholder="내용을 입력해주세요." name="word"></textarea> <br>
+- 종류 : 		
+		<input type="radio" value="문의사항" name="type1">문의사항
+		<input type="radio" value="답변" name="type1">답변
+		<input type="radio" value="확인" name="type1">확인 <br>
+- 부 : 
+		<select name="type2">
+		<option value="기획부">기획부
+		<option value="총무부">총무부
+		<option value="인사부">인사부
+		</select> <br>
+		
+- 날짜 : 
+		<select name="date2">
+			<option value="2020년">2020년
+			<option value="2021년">2021년
+		</select>
+		<select name "date3">
+			<option value="07월">07월
+			<option value="08월">08월
+		</select>
+		<select name="date4">
+			<option value="20일">20일
+			<option value="21일">21일
+			<option value="22일">22일
+		</select> <br>
+	<button>게시판 글쓰기</button>
+</form>
+</body>
+</html>
