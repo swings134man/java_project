@@ -1,0 +1,35 @@
+@charset "UTF-8";
+#data{/* 선택: 아이디 */
+	font-style: italic;
+
+}
+input{
+	font-size: 30px;
+	height: 100px;
+	width: 200px;
+}
+body {	/* 선택: 태그 */
+	color: green;;
+	font-size: 30px;
+}
+.left{ /* 선택: 클래스- 그룹을 지어서 여러개를 동일한 효과를 주고자 하는경우 */
+	background: yellow;
+	height: 100px;
+	width: 200px;
+	text-align: center;
+}
+.right{
+	width: 300px; /* css에서 스타일을 숫자로 지정하는 경우는 반드시 px를 써줘야한다.  */
+	background: green;
+}
+.bottom{
+	background: green;
+	text-align: center;
+	height: 100px;
+}
+button {
+	background: yellow;
+	color: green;
+	font-weight: bold;
+	font-size: 30px;
+}

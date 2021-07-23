@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+a:hover{
+	background: red;
+	text-decoration: none;
+	color: black;
+}
+
+li {
+	list-style: none;
+	float: left;
+	font-size: 20px;
+	background: orange;
+	padding: 15px;
+	margin: 5px;
+	border-radius: 20px;
+}
+li:hover {
+	list-style: none;
+	float: left;
+	font-size: 20px;
+	background: red;
+	padding: 15px;
+	margin: 5px;
+	border-radius: 20px;
+}
+#total{
+	width: 900px;
+	height: 900px;
+	background: green;
+	overflow-y: scroll;
+}
+#top1{
+	width: 500px;
+	height: 80px;
+}
+#top12{
+	width: 150px;
+	height: 80px;
+	background: yellow;
+	color: red;
+	position: fixed;
+	top: 30px;
+	right: 300px;
+	border-radius: 60px
+}
+
+#center{
+	width: 700px;
+	height: 750px;
+	background: gray;
+	overflow-y: scroll;
+}

@@ -1,0 +1,60 @@
+@charset "UTF-8";
+li{
+	list-style: none;
+	float: left;
+	font-size: 25px;
+	background: orange;	
+	padding: 10px; 
+	margin: 5px;
+}
+li:nth-child(2n+1){
+	background: yellow;	
+}
+
+li:hover {
+	list-style: none;
+	float: left;
+	font-size: 25px;
+	background: pink;	
+	padding: 10px; 
+	margin: 5px;
+	border-radius: 30px;
+}
+a{
+	background: white;
+	text-decoration: none;
+}
+a:hover{/* 마우스를 a태그에 올렸을 때 스 */
+	background: red;
+	text-decoration: overline;
+	color: white; 
+}
+
+#total{
+	width: 800px;
+	height: 800px;
+	background: gray;
+	
+}
+#top{
+	width: 800px;
+	height: 100px;
+	background: green;
+}
+#top2{
+	width: 300px;
+	height: 100px;
+	background: cyan;
+	color: black;
+	position: fixed;
+	top: 5px;
+	right: 5px;
+	border-radius: 100px 0 100px 0;
+}
+
+#center{
+	width: 800px;
+	height: 500px;
+	background: url('../img/car.png')
+	
+}
