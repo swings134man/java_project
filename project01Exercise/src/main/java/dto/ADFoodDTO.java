@@ -2,11 +2,20 @@ package dto;
 
 public class ADFoodDTO {
 
+	
+//	private String ad_Num;	
 	private String ad_Writer;	
 	private String ad_Title;
 	private String ad_Info;
 	private String ad_IAddress;
 	private String ad_ITime;
+	
+//	public String getAd_Num() {					// autoincre 전에 테스트용!
+//		return ad_Num;
+//	}
+//	public void setAd_Num(String ad_Num) {
+//		this.ad_Num = ad_Num;
+//	}
 	public String getAd_Writer() {
 		return ad_Writer;
 	}
@@ -39,9 +48,12 @@ public class ADFoodDTO {
 	}
 	@Override
 	public String toString() {
-		return "ADFoodDTO [ad_Writer=" + ad_Writer + ", ad_Title=" + ad_Title + ", ad_Info=" + ad_Info
-				+ ", ad_IAddress=" + ad_IAddress + ", ad_ITime=" + ad_ITime + "]";
+		return "ADFoodDTO [ad_Num=" + ", ad_Writer=" + ad_Writer + ", ad_Title=" + ad_Title + ", ad_Info="
+				+ ad_Info + ", ad_IAddress=" + ad_IAddress + ", ad_ITime=" + ad_ITime + "]";
 	}
+	
+	
+	
 	
 	
 	// 매개변수 받는 생성자. 

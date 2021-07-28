@@ -7,8 +7,9 @@
 <title>글쓰기 창</title>
 </head>
 <body>
-<form action="TEST01.jsp">
+<form action="createTest.jsp">
 
+<!-- - 글번호 : <input name="ad_Num" type="text"> <br> --> <!-- auto incre 전에 테스트용 -->
 - 작성자 : <input name="ad_Writer" type="text"> <br>
 - 제목 : <input name="ad_Title" type="text"> <br>
 - 내용 : <textarea rows="20" cols="30" placeholder="정보나 소개글을 입력하세요." name="ad_Info"></textarea> <br>
