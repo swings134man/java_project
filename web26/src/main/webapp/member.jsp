@@ -35,6 +35,15 @@
 				tel: <input name="tel"><br>
 				<button>회원수정 처리</button>
 				</form>
+				<h3>회원검색</h3>
+			<form action="read.jsp">
+				ID: <input name="id"><br> 
+				<button>회원검색 처리</button>
+			</form>
+			<hr color="red">
+			<h3>회원전체 검색</h3>
+			<a href = "all.jsp"> 전체 검색 페이지로</a>
+			
 		</div>
 	</div>
 

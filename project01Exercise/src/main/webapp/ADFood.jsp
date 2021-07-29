@@ -14,8 +14,8 @@
 			if (returnValue) {
 				 var returnPrompt = prompt("아이디를 입력하세요.",""); 
 				 location.href="deleteConfirm.jsp?ad_Writer=" + returnPrompt 
-			}
-		}
+			} //if end
+		} //function end
 	</script>
 	<div id="total">
 		<div id="top">
@@ -24,14 +24,59 @@
 		<br>
 		<div id="center">
 			동네 맛집 정보
-			<form action="Text.jsp">
+			
+			<!-- 글쓰기버튼 추후 세션 연동예정 & 권한부여 예정 -->
+			<form action="insertC.jsp">
 				<button type="submit">글쓰기</button>
 			</form>
 				
-			<!-- 글삭제 버튼 -->
+			<!-- 글삭제버튼 추후 게시글 창으로 이동예정(권한) -->
 			<input type="button" value="글삭제" onclick=bt1()>
-					
-					
+			
+			<!-- 글수정버튼 추후 게시글 창으로 이동예정(권한) -->	
+			<form action="insertU.jsp">
+				<button type="submit">글수정</button>
+			</form>	
+			<form action="insertR.jsp">
+				<button type="submit">작성글 조회</button>
+			</form>	
+				
+				<table>
+						<tr> <!-- 1번. 사진 -->
+							<td> <!-- 1 번 가게 -->
+							
+							</td>
+							<td> <!-- 2 번 가게 -->
+							
+							</td>
+							<td> <!-- 3 번 가게 -->
+							
+							</td>
+						</tr>
+						<tr> <!-- 2번 가게이름. writer -->
+							<td> <!-- 1 번 가게 -->
+							
+							</td>
+							<td> <!-- 2 번 가게 -->
+							
+							</td>
+							<td> <!-- 3 번 가게 -->
+							
+							</td>
+						</tr>
+						<tr> <!-- 3번 제목  -->
+							<td> <!-- 1 번 title -->
+							
+							</td>
+							<td> <!-- 2 번 title -->
+							
+							</td>
+							<td> <!-- 3 번 title -->
+							
+							</td>
+						</tr>
+				</table>			
+			
 			
 		</div>
 	</div>

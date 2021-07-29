@@ -11,7 +11,13 @@
     	bag.setId(id);
 		//dao 를 만들어서 탈퇴 요청!
 		회원DAO2 dao = new 회원DAO2();
-    	dao.delete(bag);
+    	int result = dao.delete(bag);
+    	
+    	String text = "회원탈퇴처리 실패!재시도하세요.";
+    	if(result == 1) {
+    		text = "탈퇴 성공! ";
+    	}
+
     %>
     
 <!DOCTYPE html>
@@ -22,5 +28,9 @@
 </head>
 <body>
 	탈퇴처리 요청함. 
+	실행결과 <%=text %> <br>
+	<form action="member.jsp">
+	<button >홈으로</button>
+	</form>
 </body>
 </html>

@@ -23,7 +23,7 @@
 	<hr color="purple">
 	글삭제가 완료되었습니다!
 	<hr color="purple"> 
-	<form action="home.html">
+	<form action="placeM.html">
 		<button>HOME 으로 가기!</button>
 	</form>
 	

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <ul>
 	<li>
-		<font size="5px"><a href="home.html">HOME</a></font>
+		<font size="5px"><a href="placeM.html">HOME</a></font>
 	</li>
 	<li>
 		<font size="5px"><a href="ADFood.jsp">동네맛집</a></font>

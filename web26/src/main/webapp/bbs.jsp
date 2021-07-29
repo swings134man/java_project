@@ -21,6 +21,11 @@
 				내용: <input name="content"><br> 작성자: <input name="writer"><br>
 				<button>게시판 글씨기 처리</button>
 			</form>
+			<h3>게시판 하나검색</h3>
+			<form action="read2.jsp">
+				ID: <input name="id"><br> 
+				<button>게시판 하나 검색 처리</button>
+			</form>
 	</div>
 </div>
 

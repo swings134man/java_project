@@ -1,21 +1,38 @@
 package dto;
 
+import java.sql.Array;
+import java.util.Arrays;
+
 public class ADFoodDTO {
 
 	
-//	private String ad_Num;	
+	private String ad_Img;	
 	private String ad_Writer;	
 	private String ad_Title;
 	private String ad_Info;
 	private String ad_IAddress;
 	private String ad_ITime;
+	private String ad_Num;
 	
-//	public String getAd_Num() {					// autoincre 전에 테스트용!
-//		return ad_Num;
-//	}
-//	public void setAd_Num(String ad_Num) {
-//		this.ad_Num = ad_Num;
-//	}
+	
+
+	@Override
+	public String toString() {
+		return "ADFoodDTO [ad_Img=" + ad_Img + ", ad_Writer=" + ad_Writer + ", ad_Title=" + ad_Title + ", ad_Info="
+				+ ad_Info + ", ad_IAddress=" + ad_IAddress + ", ad_ITime=" + ad_ITime + ", ad_Num=" + ad_Num + "]";
+	}
+	public String getAd_Num() {
+		return ad_Num;
+	}
+	public void setAd_Num(String ad_Num) {
+		this.ad_Num = ad_Num;
+	}
+	public String getAd_Img() {
+		return ad_Img;
+	}
+	public void setAd_Img(String ad_Img) {
+		this.ad_Img = ad_Img;
+	}
 	public String getAd_Writer() {
 		return ad_Writer;
 	}
@@ -46,11 +63,12 @@ public class ADFoodDTO {
 	public void setAd_ITime(String ad_ITime) {
 		this.ad_ITime = ad_ITime;
 	}
-	@Override
-	public String toString() {
-		return "ADFoodDTO [ad_Num=" + ", ad_Writer=" + ad_Writer + ", ad_Title=" + ad_Title + ", ad_Info="
-				+ ad_Info + ", ad_IAddress=" + ad_IAddress + ", ad_ITime=" + ad_ITime + "]";
-	}
+	
+	
+	
+	
+	
+	
 	
 	
 	
