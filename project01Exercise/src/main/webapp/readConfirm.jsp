@@ -11,6 +11,7 @@
     	
     	ADFoodDAO dao = new ADFoodDAO();
     	ADFoodDTO dto2 = dao.read(dto);
+    		
     %>
 <!DOCTYPE html>
 <html>
@@ -19,11 +20,20 @@
 <title>read 페이지</title>
 </head>
 <body>
+<script type="text/javascript">				/* 버튼 onclick 선언부분 */
+		function bt1(){
+		 var returnValue = confirm('글을 삭제하시겠습니까?');
+			if (returnValue) {
+				 var returnPrompt = prompt("아이디를 입력하세요.",""); 	/* 현재 조회한 글 작성자 삭제 방식 도입해야함 */
+				 location.href="deleteConfirm.jsp?ad_Writer=" + returnPrompt 
+			} //if end
+		} //function end
+	</script>
 <h3> 게시글 </h3>
 <hr color="red">
-	<table>
+	<table border="1">
 		<tr> <!-- 1번줄 -->
-			<td>
+			<td width="80px">
 				글번호 : <%= dto2.getAd_Num() %>
 			</td>
 			<td>
@@ -44,7 +54,7 @@
 			</td>
 		</tr>
 		<tr>	<!-- 4번 -->
-			<td>
+			<td colspan="3">
 				업체주소: 	<%= dto2.getAd_IAddress() %> <br>
 				운영시간:	<%= dto2.getAd_ITime() %>
 			</td>
@@ -63,6 +73,6 @@
 	<form action="insertU.jsp">
 		<button>글 수정</button>
 	</form>
-
+<input type="button" value="글삭제" onclick=bt1()>
 </body>
 </html>

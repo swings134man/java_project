@@ -16,17 +16,17 @@
 		<jsp:include page="top2.jsp"></jsp:include>
 	</div>
 	<div id="center">
-		<form action="insert2.jsp">
+		<form action="">
 				ID: <input name="id"><br> 제목: <input name="title"><br>
 				내용: <input name="content"><br> 작성자: <input name="writer"><br>
 				<button>게시판 글씨기 처리</button>
 			</form>
 			<h3>게시판 하나검색</h3>
-			<form action="read2.jsp">
+			<form action="read3.jsp">
 				ID: <input name="id"><br> 
 				<button>게시판 하나 검색 처리</button>
 			</form>
-			<a href="all2.jsp">게시판 모든 목록 가지고 오는 페이지 호출</a>
+			<a href="all3.jsp">게시판 모든 목록 가지고 오는 페이지 호출</a>
 	</div>
 </div>
 

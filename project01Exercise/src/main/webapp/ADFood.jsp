@@ -38,44 +38,44 @@
 				<button type="submit">글수정</button>
 			</form>	
 			<form action="insertR.jsp">
-				<button type="submit">작성글 조회</button>
+				<button type="submit">작성글 조회</button>	<!-- 아이디 조회방식 -->
 			</form>	
-				
-				<table>
-						<tr> <!-- 1번. 사진 -->
-							<td> <!-- 1 번 가게 -->
+			<a href="readAll.jsp">게시판 전체글 조회</a>
+				<!-- <table>
+						<tr> 1번. 사진
+							<td> 1 번 가게
 							
 							</td>
-							<td> <!-- 2 번 가게 -->
+							<td> 2 번 가게
 							
 							</td>
-							<td> <!-- 3 번 가게 -->
-							
-							</td>
-						</tr>
-						<tr> <!-- 2번 가게이름. writer -->
-							<td> <!-- 1 번 가게 -->
-							
-							</td>
-							<td> <!-- 2 번 가게 -->
-							
-							</td>
-							<td> <!-- 3 번 가게 -->
+							<td> 3 번 가게
 							
 							</td>
 						</tr>
-						<tr> <!-- 3번 제목  -->
-							<td> <!-- 1 번 title -->
+						<tr> 2번 가게이름. writer
+							<td> 1 번 가게
 							
 							</td>
-							<td> <!-- 2 번 title -->
+							<td> 2 번 가게
 							
 							</td>
-							<td> <!-- 3 번 title -->
+							<td> 3 번 가게
 							
 							</td>
 						</tr>
-				</table>			
+						<tr> 3번 제목 
+							<td> 1 번 title
+							
+							</td>
+							<td> 2 번 title
+							
+							</td>
+							<td> 3 번 title
+							
+							</td>
+						</tr>
+				</table>			 -->
 			
 			
 		</div>
