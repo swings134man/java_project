@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+body{
+	background-color: yellow;
+}
+
+body button {
+	font-size: 15px;
+	background-color: purple;
+	color: red; 
+	
+}
