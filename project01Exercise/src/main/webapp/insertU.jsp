@@ -13,7 +13,8 @@
 <hr color="green">
 
 - 작성자 : <input name="ad_Writer" type="text" placeholder="글 작성시 사용한 id 작성하세요."> <br>
-- 제목 : <input name="ad_Title" type="text" placeholder="수정할내용을 작성하세요."> <br>
+- 가게이름 : <input name="ad_Name" type="text" placeholder="수정할내용을 작성하세요."> <br>
+- 한줄소개 : <input name="ad_Title" type="text" placeholder="수정할내용을 작성하세요."> <br>
 - 내용 : <textarea rows="20" cols="30" placeholder="수정할 내용을 작성하세요." name="ad_Info"></textarea> <br>
 - 주소 : <input name="ad_IAddress" type="text" placeholder="수정할내용을 작성하세요."> <br>
 - 영업시간 : <input name="ad_ITime" type="text" placeholder="수정할내용을 작성하세요."> <br>

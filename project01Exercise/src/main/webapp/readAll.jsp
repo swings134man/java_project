@@ -7,6 +7,10 @@
 <%
 ADFoodDAO dao = new ADFoodDAO();
 ArrayList<ADFoodDTO> list = dao.read();
+
+String memberId = "test";
+int memberBusiness = 1;
+
 %>
 <!DOCTYPE html>
 <html>
@@ -29,10 +33,10 @@ ArrayList<ADFoodDTO> list = dao.read();
 		for (ADFoodDTO dto : list) {
 		%>
 		<tr>
-			<td><%=dto.getAd_Img()%></td>
+			<td><a href="http://localhost:8889/project01Exercise/post.jsp?ad_Writer=<%=dto.getAd_Writer()%>" ><img width="80px" height="80px" src="img/<%= dto.getAd_Img() %>" ></a></td>
 			<td><%=dto.getAd_Num()%></td>
 			<td><a
-				href="http://localhost:8889/project01Exercise/readConfirm.jsp?ad_Writer=<%=dto.getAd_Writer()%>">
+				href="http://localhost:8889/project01Exercise/post.jsp?ad_Writer=<%=dto.getAd_Writer()%>">
 					<!-- 제목 눌렀을때 이동 --> <%=dto.getAd_Title()%>
 			</a></td>
 			<td><%=dto.getAd_Writer()%></td>
@@ -45,17 +49,25 @@ ArrayList<ADFoodDTO> list = dao.read();
 	<hr color="red">
 	전체 게시판 목록 개수 :
 	<%=list.size()%>
-	개
 	<br>
+	<!-- 세션 글쓰기 버튼 활성화 부분 -->
+	<%
+		if(memberId != null && memberBusiness == 1){
+	%>
 	<form action="insertC.jsp">
 		<button type="submit">글쓰기</button>
 	</form>
+	<%} %>
 	
-		<form action="insertR.jsp">
-				<button type="submit">작성글 조회</button>	<!-- 아이디 조회방식 -->
-			</form>		
+	<hr color="red">
 	
+	<form action="readOne.jsp">
+		- 작성자 아이디 : <input name="ad_Writer" type="text" placeholder="글 작성시 사용한 id 작성하세요."> <br>
+
+	<button type="submit">조회!</button>
+	</form>
 	
+	<button onclick="history.back(1)">back</button>
 
 </body>
 </html>

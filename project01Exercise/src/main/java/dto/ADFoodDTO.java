@@ -13,13 +13,33 @@ public class ADFoodDTO {
 	private String ad_IAddress;
 	private String ad_ITime;
 	private String ad_Num;
+	private String ad_Name;
+	private int ad_Recommend;
 	
 	
 
+	
+	
+	
+	
+	
 	@Override
 	public String toString() {
 		return "ADFoodDTO [ad_Img=" + ad_Img + ", ad_Writer=" + ad_Writer + ", ad_Title=" + ad_Title + ", ad_Info="
-				+ ad_Info + ", ad_IAddress=" + ad_IAddress + ", ad_ITime=" + ad_ITime + ", ad_Num=" + ad_Num + "]";
+				+ ad_Info + ", ad_IAddress=" + ad_IAddress + ", ad_ITime=" + ad_ITime + ", ad_Num=" + ad_Num
+				+ ", ad_Name=" + ad_Name + ", ad_Recommend=" + ad_Recommend + "]";
+	}
+	public String getAd_Name() {
+		return ad_Name;
+	}
+	public void setAd_Name(String ad_Name) {
+		this.ad_Name = ad_Name;
+	}
+	public int getAd_Recommend() {
+		return ad_Recommend;
+	}
+	public void setAd_Recommend(int ad_Recommend) {
+		this.ad_Recommend = ad_Recommend;
 	}
 	public String getAd_Num() {
 		return ad_Num;

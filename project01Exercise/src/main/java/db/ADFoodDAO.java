@@ -34,14 +34,15 @@ public class ADFoodDAO {
 		int result = 0;
 		try {
 
-			String sql = "insert into ADFood values (null ,?, ?, ?, ?, ?, ?)";
+			String sql = "insert into ADFood values (null ,?, ?, ?, ?, ?, ?, ?, 0 )";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, dto.getAd_Writer());
-			ps.setString(2, dto.getAd_Title());
-			ps.setString(3, dto.getAd_Info());
-			ps.setString(4, dto.getAd_IAddress());
-			ps.setString(5, dto.getAd_ITime());
-			ps.setString(6, dto.getAd_Img());
+			ps.setString(2, dto.getAd_Name());
+			ps.setString(3, dto.getAd_Title());
+			ps.setString(4, dto.getAd_Info());
+			ps.setString(5, dto.getAd_IAddress());
+			ps.setString(6, dto.getAd_ITime());
+			ps.setString(7, dto.getAd_Img());
 
 			System.out.println("3. sql문 생성 성공!!!");
 			result = ps.executeUpdate();
@@ -77,14 +78,15 @@ public class ADFoodDAO {
 		int result = 0;
 		try {
 			// 3. sql문을 만든다.
-			String sql = "update ADFood set ad_Title = ?, ad_info = ?, ad_IAddress = ?, ad_ITime = ?, ad_img = ? where ad_writer = ?";
+			String sql = "update ADFood set ad_Title = ?, ad_info = ?, ad_IAddress = ?, ad_ITime = ?, ad_img = ?, ad_Name = ? where ad_writer = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, dto.getAd_Title());
 			ps.setString(2, dto.getAd_Info());
 			ps.setString(3, dto.getAd_IAddress());
 			ps.setString(4, dto.getAd_ITime());
 			ps.setString(5, dto.getAd_Img());
-			ps.setString(6, dto.getAd_Writer());
+			ps.setString(6, dto.getAd_Img());
+			ps.setString(7, dto.getAd_Writer());
 			System.out.println("3. sql문 생성 성공!!!");
 			// 4. sql문을 mysql로 전송한다.
 			result = ps.executeUpdate();
@@ -112,25 +114,29 @@ public class ADFoodDAO {
 			System.out.println("4. sql문 전송 전송");
 			if (rs.next()) {
 				System.out.println("검색 결과가 있음.");
-//	        	 int ad_Num = rs.getInt(1);
 				String ad_Num = rs.getString(1);
 				String ad_Writer = rs.getString(2);
-				String ad_Title = rs.getString(3);
-				String ad_Info = rs.getString(4);
-				String ad_IAddress = rs.getString(5);
-				String ad_Itime = rs.getString(6);
-				String ad_Img = rs.getString(7);
-				System.out.println(ad_Num + " " + ad_Writer + " " + ad_Info + " " + ad_Title + " " + ad_IAddress + " "
-						+ ad_Itime + " " + ad_Img);
+				String ad_Name = rs.getString(3);
+				String ad_Title = rs.getString(4);
+				String ad_Info = rs.getString(5);
+				String ad_IAddress = rs.getString(6);
+				String ad_Itime = rs.getString(7);
+				String ad_Img = rs.getString(8);
+				int ad_Recommend = rs.getInt(9);
+				System.out.println(ad_Num + " "+ ad_Name+ " " + ad_Writer + " " + ad_Info + " " + ad_Title + " " + ad_IAddress + " "
+						+ ad_Itime + " " + ad_Img + " " + ad_Recommend);
 				dto2.setAd_Num(ad_Num);
 				dto2.setAd_Writer(ad_Writer);
+				dto2.setAd_Name(ad_Name);
 				dto2.setAd_Info(ad_Info);
 				dto2.setAd_Title(ad_Title);
 				dto2.setAd_IAddress(ad_IAddress);
 				dto2.setAd_ITime(ad_Itime);
 				dto2.setAd_Img(ad_Img);
+				dto2.setAd_Recommend(ad_Recommend);
 			} else {
 				System.out.println("검색 결과가 없음.");
+				
 			}
 		} catch (SQLException e) { // 2-4단계
 			System.out.println("2-4번 에러>> DB관련된 처리하다 에러발생함..!!!!");
@@ -155,11 +161,12 @@ public class ADFoodDAO {
 				System.out.println("검색 결과가 있음.");
 				dto2.setAd_Num((rs.getString(1)));
 				dto2.setAd_Writer(rs.getString(2));
-				dto2.setAd_Info(rs.getString(3));
-				dto2.setAd_Title(rs.getString(4));
-				dto2.setAd_IAddress(rs.getString(5));
-				dto2.setAd_ITime(rs.getString(6));
-				dto2.setAd_Img(rs.getString(7));
+				dto2.setAd_Name(rs.getString(3));
+				dto2.setAd_Info(rs.getString(4));
+				dto2.setAd_Title(rs.getString(5));
+				dto2.setAd_IAddress(rs.getString(6));
+				dto2.setAd_ITime(rs.getString(7));
+				dto2.setAd_Img(rs.getString(8));
 				System.out.println(dto2);
 				list.add(dto2);
 				System.out.println(list.size());
@@ -171,5 +178,28 @@ public class ADFoodDAO {
 		return list;
 	} // read end
 
+	// 버튼 ++ (추천)
+	public int like(String ad_Name) {
+		int result = 0;
+		try {
+			// 3. sql문을 만든다.
+			String sql = "update ADFood set ad_Recommend = ad_Recommend + 1 where ad_Name = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, ad_Name);
+			
+			System.out.println("3. sql문 생성 성공!!!");
+			// 4. sql문을 mysql로 전송한다.
+			result = ps.executeUpdate();
+			System.out.println("4. sql문 전송 전송");
+			System.out.println(result);
+		} catch (SQLException e) { // 2-4단계
+			System.out.println("2-4번 에러>> DB관련된 처리하다 에러발생함..!!!!");
+			e.printStackTrace(); // DB 상세에러 내용 확인
+		}
+		return result;
+	} // update end
+	
+	
+	
 	
 } // class

@@ -10,6 +10,7 @@
     	String ad_IAddress = request.getParameter("ad_IAddress");
     	String ad_ITime = request.getParameter("ad_ITime"); 
     	String ad_Img = request.getParameter("ad_Img");
+    	String ad_Name = request.getParameter("ad_Name");
     	
 		ADFoodDAO dao = new ADFoodDAO();
     	ADFoodDTO dto = new ADFoodDTO(); //bag 
@@ -20,6 +21,7 @@
     	dto.setAd_IAddress(ad_IAddress);
     	dto.setAd_ITime(ad_ITime);
     	dto.setAd_Img(ad_Img);
+    	dto.setAd_Name(ad_Name);
     	
     	dao.create(dto);
     %>
