@@ -4,6 +4,10 @@
     pageEncoding="UTF-8"%>
     
     <%
+		ADFoodDAO dao = new ADFoodDAO();
+    	ADFoodDTO dto = new ADFoodDTO(); //bag
+    	
+    	
     	String ad_Writer = request.getParameter("ad_Writer");
     	String ad_Title = request.getParameter("ad_Title");
     	String ad_Info = request.getParameter("ad_Info");
@@ -11,9 +15,12 @@
     	String ad_ITime = request.getParameter("ad_ITime"); 
     	String ad_Img = request.getParameter("ad_Img");
     	String ad_Name = request.getParameter("ad_Name");
+    	String ad_Map_10 = request.getParameter("ad_Map_1");
+    	String ad_Map_20 = request.getParameter("ad_Map_2");
     	
-		ADFoodDAO dao = new ADFoodDAO();
-    	ADFoodDTO dto = new ADFoodDTO(); //bag 
+    	// 경도,위도 값 float 형변환 
+    	float ad_Map_1 = Float.parseFloat(ad_Map_10);
+    	float ad_Map_2 = Float.parseFloat(ad_Map_20);
     	
     	dto.setAd_Writer(ad_Writer);
     	dto.setAd_Title(ad_Title);
@@ -22,6 +29,8 @@
     	dto.setAd_ITime(ad_ITime);
     	dto.setAd_Img(ad_Img);
     	dto.setAd_Name(ad_Name);
+    	dto.setAd_Map_1(ad_Map_1);
+    	dto.setAd_Map_2(ad_Map_2);
     	
     	dao.create(dto);
     %>
@@ -35,7 +44,7 @@
 <body>
 		테스트 글작성 성공!	<br>
 		<%= dto.getAd_Img() %>
-		<form action="placeM.html">
+		<form action="ADFood.jsp">
 			<button>홈으로 가기</button>
 		</form>
 		

@@ -10,12 +10,11 @@
 		ArrayList<ADFoodDTO> list = dao.read();
 	
 		/* 세션set admin 권한 */
-		String memberId = "admin";
-		int memberBusiness = 1;
+		String memberId = "admin";		// 추후 세션 아이디 값 
+		int memberBusiness = 2;			// 세션 비지니스 값 
 		
 		
 	%>
-	
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,65 +27,58 @@
 		function bt1(){
 		 var returnValue = confirm('글을 삭제하시겠습니까?');
 			if (returnValue) {
-				 var returnPrompt = prompt("아이디를 입력하세요.",""); 
+				 var returnPrompt = prompt("작성자 아이디를 입력하세요.",""); 
 				 location.href="deleteConfirm.jsp?ad_Writer=" + returnPrompt 
-						 
 			} //if end
 		} //function end
 	</script>
+	<!-- 상단 탭 -->
 	<div id="total">
 		<div id="top">
 			<jsp:include page="top.jsp"></jsp:include>
 		</div>
 		<br>
+		<!-- 리스트업 화면 -->
 		<div id="center">
 			동네 맛집 정보
-			
-			
+			<!-- 관리자 권한 (관리자만 보임) -->			
 			<%
-				if(memberId.equals("admin") && memberBusiness == 1){
+				if(memberId.equals("admin") && memberBusiness == 2){
 			%>
 			<!-- 글쓰기버튼 추후 세션 연동예정 & 권한부여 예정 -->
 			<form action="insertC.jsp">
-				<button type="submit">글쓰기</button>
+				<button type="submit">글쓰기(admin)</button>
 			</form>
 				
 			<!-- 글삭제버튼 추후 게시글 창으로 이동예정(권한) -->
-			<input type="button" value="글삭제" onclick=bt1()>
+			<input type="button" value="글삭제(admin)" onclick=bt1()>
 			
 			<!-- 글수정버튼 추후 게시글 창으로 이동예정(권한) -->	
 			<form action="insertU.jsp">
-				<button type="submit">글수정</button>
+				<button type="submit">글수정(admin)</button>
 			</form>	
 			<%} %>
-			
-			<a href="readAll.jsp">게시판 전체글 조회</a>
 			<hr color="red">
-				<!-- 동네 맛집랭킹 list up  --> 
-				 <table border="1">
+			
+			<!-- 동네 맛집랭킹 list up 3개  --> 
+				<h3>동네 맛집 추천!</h3>
+				 <table border="1" style="width: 850px;">
 				 <%
-				 for (int i = 6; i < 9; i++  ) {
+				 for (int i = 0; i < 3; i++  ) {
 						ADFoodDTO dto1 = list.get(i);
 				 %>
 						<tr> <!-- 1번. 사진 -->
-							<td><a href="http://localhost:8889/project01Exercise/post.jsp?ad_Writer=<%=dto1.getAd_Writer()%>" ><img width="80px" height="80px" src="img/<%= dto1.getAd_Img() %>" ></a></td>
-							<td> 가게 이름 :
-								<%= dto1.getAd_Name() %>
-							</td>
-							
-							<td> 가게 한줄 소개 : <!-- 3번 제목 title -->
-							<%= dto1.getAd_Title() %>
-							</td>
-							<td> 작성자 :	<!-- 2번 가게이름. writer -->
-							<%= dto1.getAd_Writer() %>
-							</td>
+							<td width="13%"><a href="http://localhost:8889/project01Exercise/post.jsp?ad_Writer=<%=dto1.getAd_Writer()%>" ><img width="80px" height="80px" src="img/<%= dto1.getAd_Img() %>" ></a></td>
+							<td width="20%"> 가게 이름 :<%= dto1.getAd_Name() %></td>
+	   <!-- 3번 제목 title --><td> 가게 한줄 소개 :<%= dto1.getAd_Title() %></td>
+							<td width="8%">추천수 : <%= dto1.getAd_Recommend() %></td>
+	<!--2번 가게이름. writer--><td width="15%"> 작성자 :	<%= dto1.getAd_Writer() %></td>
 						</tr>
 						<%
 						}
 						%>
 				</table>			 
-			
-			
+			<a href="readAll.jsp">게시판 전체글 조회</a>
 		</div>
 	</div>
 	동네 맛집 랭킹

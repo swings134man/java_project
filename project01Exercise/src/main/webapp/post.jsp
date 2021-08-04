@@ -3,37 +3,50 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%
-String ad_writer = request.getParameter("ad_Writer");
-
-ADFoodDTO dto = new ADFoodDTO();
-dto.setAd_Writer(ad_writer);
-
-ADFoodDAO dao = new ADFoodDAO();
-ADFoodDTO dto2 = dao.read(dto);
-
-/* 세션 set */
-String memberId = dto2.getAd_Writer();
-int memberBusiness = 1;
-
-%>
+	<%
+		String ad_writer = request.getParameter("ad_Writer");
+		
+		ADFoodDTO dto = new ADFoodDTO();
+		dto.setAd_Writer(ad_writer);
+		
+		ADFoodDAO dao = new ADFoodDAO();
+		ADFoodDTO dto2 = dao.read(dto);
+		
+		/* 세션 set */
+		String memberId = dto2.getAd_Writer();  // 추후 세션아이디 값 가져올것.
+		int memberBusiness = 1;					// 세션 비지니스 인트값 가져올것.
+		String id = "admin";
+		int memberBusiness1 = 2;
+		
+	%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>read 페이지</title>
+<title>게시판 글 페이지</title>
 </head>
 <body>
-
-	<script type="text/javascript">				/* 버튼 onclick 선언부분 */
-		function bt1(){
-		 var returnValue = confirm('글을 삭제하시겠습니까?');
-			if (returnValue) {
-				 var returnPrompt = prompt("아이디를 입력하세요.",""); 	/* 현재 조회한 글 작성자 삭제 방식 도입해야함 */
-				 location.href="deleteConfirm.jsp?ad_Writer=" + returnPrompt 
-			} //if end
-		} //function end
+	<!-- 추천 메서드 -->
+	<script type="text/javascript">
+		function like1() {
+			var con = confirm('해당 가게를 추천 하시겠습니까?');
+			  if (con) {
+				location.href="http://localhost:8889/project01Exercise/recommend.jsp?ad_Name=" + '<%= dto2.getAd_Name() %>';
+				alert('추천이 완료되었습니다!');
+			} 
+		} //추천 func end
 	</script>
+	<!-- delete 메서드 -->
+	<script type="text/javascript">
+		function del() {
+			var del1 = confirm('글을 정말 삭제하시겠습니까?');
+			if (del1) {
+				alert('글이 삭제되었습니다.');
+				location.href="deleteConfirm.jsp?ad_Writer=" + '<%= dto2.getAd_Writer() %>';
+			}
+		} //삭제 func end
+	</script> 
+	
 	<h3>게시글</h3>
 	<hr color="red">
 	<table border="1">
@@ -67,37 +80,74 @@ int memberBusiness = 1;
 			<img width="200px" height="200px" src="img/<%=dto2.getAd_Img()%>">
 			</td>
 		</tr>
+		<tr>
+			<td colspan="3"><div id="map" style="width:100%;height:250px;">업체 위치</div></td>
+				
+						
+		</tr>
 	</table>
-	<hr color="red">
+	
+		
+	 <!-- 지도 ,,, -->
+		<!-- <div id="map" style="width:20%;height:250px;"></div> -->
+
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=12834938b9d60b4b8bc5becd102451f4"></script>
+		<script>
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+			    mapOption = { 
+			        center: new kakao.maps.LatLng(<%= dto2.getAd_Map_1() %>, <%= dto2.getAd_Map_2() %>), // 지도의 중심좌표
+			        level: 3 // 지도의 확대 레벨
+			    };
+
+			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+			// 마커가 표시될 위치입니다 
+			var markerPosition  = new kakao.maps.LatLng(<%= dto2.getAd_Map_1() %>, <%= dto2.getAd_Map_2() %>); 
+			
+			// 마커를 생성합니다
+			var marker = new kakao.maps.Marker({
+			    position: markerPosition
+			});
+
+				// 마커가 지도 위에 표시되도록 설정합니다
+				marker.setMap(map);
+				
+				// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+				// marker.setMap(null);    
+			</script>
+	<hr color="red">	
 	<button onclick="history.back(1)">back</button>
-	<!-- <form action="ADFood.jsp">
-		<button>이전화면 으로!</button>
-	</form> -->
-	
-	<!-- 세션으로 visible set -->
-	
+			<!-- 세션으로 visible set 버튼 -->
 	<%
-		if(memberId == dto2.getAd_Writer() && memberBusiness == 1){ 
+		if((memberId == dto2.getAd_Writer() && memberBusiness == 1) || (id == "admin" && memberBusiness1 == 2)){ 
 	%>
 	
-	<form action="insertU.jsp">
+	<!-- <form action="insertU.jsp">
 		<button>글 수정</button>
-	</form>
-	<input type="button" value="글삭제" onclick=bt1()>
+	</form> -->
+	
+	<a href="http://localhost:8889/project01Exercise/insertU.jsp?ad_Writer=<%= dto2.getAd_Writer()%>"><button>수정</button></a>
+			
+	<input type="button" value="글삭제" onclick=del()>
 	<%} %>
-
-
-
-
+	
 	<!-- 추천 -->
-	
-	<a href="http://localhost:8889/project01Exercise/recommend.jsp?ad_Name=<%= dto2.getAd_Name() %>">글추천</a>
-	
-	 <%-- <form action="recommend.jsp" value="<%= dto2.getAd_Name() %>">
-		<button >글추천</button>
-	</form>  --%>
-
-	<!-- <input type="button" value="글추천" onclick=rec()> -->
-
+	<input type="button" value="추천~!" onclick=like1()>  <!-- 이거 사용하는 방향으로 갈것 -->
+		
+		<!-- -----------------test---------------------- -->
+	<!-- 추천 버튼 직접적링크 -->
+	<%-- <a href="http://localhost:8889/project01Exercise/recommend.jsp?ad_Name=<%= dto2.getAd_Name() %>"><button>글추천</button></a>  --%>
+	<!-- 글삭제 버튼 직접링크 -->		
+	<%-- <a href="http://localhost:8889/project01Exercise/deleteConfirm.jsp?ad_Writer=<%= dto2.getAd_Writer() %>"><button>글삭제f</button></a>  --%>
+	<!-- <script type="text/javascript">				/* 버튼 onclick 선언부분 */
+		function bt1(){
+		 var returnValue = confirm('글을 삭제하시겠습니까?');
+			if (returnValue) {
+				 var returnPrompt = prompt("아이디를 입력하세요.",""); 	/* 현재 조회한 글 작성자 삭제 방식 도입해야함 */
+				 location.href="deleteConfirm.jsp?ad_Writer=" + returnPrompt 
+			} //if end
+		} //function end
+		</script> -->
+		
 </body>
 </html>

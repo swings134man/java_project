@@ -15,19 +15,28 @@ public class ADFoodDTO {
 	private String ad_Num;
 	private String ad_Name;
 	private int ad_Recommend;
-	
-	
-
-	
-	
-	
+	private float ad_Map_1;
+	private float ad_Map_2;
 	
 	
 	@Override
 	public String toString() {
 		return "ADFoodDTO [ad_Img=" + ad_Img + ", ad_Writer=" + ad_Writer + ", ad_Title=" + ad_Title + ", ad_Info="
 				+ ad_Info + ", ad_IAddress=" + ad_IAddress + ", ad_ITime=" + ad_ITime + ", ad_Num=" + ad_Num
-				+ ", ad_Name=" + ad_Name + ", ad_Recommend=" + ad_Recommend + "]";
+				+ ", ad_Name=" + ad_Name + ", ad_Recommend=" + ad_Recommend + ", ad_Map_1=" + ad_Map_1 + ", ad_Map_2="
+				+ ad_Map_2 + "]";
+	}
+	public float getAd_Map_1() {
+		return ad_Map_1;
+	}
+	public void setAd_Map_1(float ad_Map_1) {
+		this.ad_Map_1 = ad_Map_1;
+	}
+	public float getAd_Map_2() {
+		return ad_Map_2;
+	}
+	public void setAd_Map_2(float ad_Map_2) {
+		this.ad_Map_2 = ad_Map_2;
 	}
 	public String getAd_Name() {
 		return ad_Name;
