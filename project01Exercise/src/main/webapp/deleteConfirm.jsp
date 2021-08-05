@@ -1,4 +1,4 @@
-<%@page import="dto.ADFoodDTO"%>
+<%@page import="DTO.ADFoodDTO"%>
 <%@page import="db.ADFoodDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

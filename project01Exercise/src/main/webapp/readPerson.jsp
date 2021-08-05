@@ -1,5 +1,5 @@
 <%@page import="db.ADFoodDAO"%>
-<%@page import="dto.ADFoodDTO"%>
+<%@page import="DTO.ADFoodDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     

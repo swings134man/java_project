@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import dto.ADFoodDTO;
+import DTO.ADFoodDTO;
 
 public class ADFoodDAO {
 	// bag 받아와서 DB 로 넣는곳.

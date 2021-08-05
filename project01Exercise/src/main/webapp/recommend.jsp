@@ -1,10 +1,10 @@
-<%@page import="dto.ADFoodDTO"%>
+<%@page import="DTO.ADFoodDTO"%>
 <%@page import="db.ADFoodDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
     <%
-    	// 해당 페이지는 리다이렉션으로 보이지않음.
+    	// 해당 페이지는 리디렉션으로 보이지않음.
     	
     	String ad_Writer = request.getParameter("ad_Writer");
     	String ad_Name = request.getParameter("ad_Name");
