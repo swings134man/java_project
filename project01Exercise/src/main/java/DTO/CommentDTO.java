@@ -5,8 +5,15 @@ public class CommentDTO {
 	String ad_Content;
 	int ad_FoodNum;
 	String ad_Writer;
+	String ad_Time;
 	public CommentDTO() {
 		super();
+	}
+	public String getAd_Time() {
+		return ad_Time;
+	}
+	public void setAd_Time(String ad_Time) {
+		this.ad_Time = ad_Time;
 	}
 	public int getAd_CoNum() {
 		return ad_CoNum;
@@ -35,7 +42,7 @@ public class CommentDTO {
 	@Override
 	public String toString() {
 		return "CommentDTO [ad_CoNum=" + ad_CoNum + ", ad_Content=" + ad_Content + ", ad_FoodNum=" + ad_FoodNum
-				+ ", ad_Writer=" + ad_Writer + "]";
+				+ ", ad_Writer=" + ad_Writer + ", ad_Time=" + ad_Time + "]";
 	}
 	
 	

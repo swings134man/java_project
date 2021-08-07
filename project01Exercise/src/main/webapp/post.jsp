@@ -22,7 +22,8 @@
 		/* 세션 set */
 		String memberId = dto2.getAd_Writer();  // 추후 세션아이디 값 가져올것.
 		int memberBusiness = 1;					// 세션 비지니스 인트값 가져올것.
-		String id = "admin";
+		String id = "admin";					// 댓글 아이디 --> 세션 
+		//String id = null;
 		int memberBusiness1 = 2;
 		
 	%>
@@ -36,24 +37,37 @@
 					/* 댓글 기능 func */
 	$(function() {
 		$('#bt1').click(function() {
+			// 시간 
+			var time = new Date();
+			ad_Time1 = time.toLocaleString();
+			// 댓글 입력 값 
 			commentM = $('#comment').val();
 			$.ajax({
 				url: "commentReply.jsp",  // dao 로 넘겨주는 jsp 페이지 연동. 
 				data: {
 					ad_FoodNum : '<%= ad_FoodNum %>' , 
 					ad_Content : commentM , 
-					ad_Writer : '<%= id %>' 
+					ad_Writer : '<%= id %>',
+					ad_Time : ad_Time1 
 				},
 				success: function(result) {
 					if (result == 1) {
-						location.href = "http://localhost:8889/project01Exercise/post.jsp?ad_Writer=<%=dto2.getAd_Writer()%>"
-					} //if end				
-					
-				} //success end 
-			}) //ajax
+							location.href = "http://localhost:8889/project01Exercise/post.jsp?ad_Writer=<%=dto2.getAd_Writer()%>"
+						} //if end				
+					} //success end 
+				}) //ajax
+			
+			
+			
+			
+			
 		}) //click end 
-	}) //func end
+
+			
+	}) //func end 
 </script>
+
+
 </head>
 <body>
 	<!-- 추천 메서드 -->
@@ -76,6 +90,16 @@
 			}
 		} //삭제 func end
 	</script> 
+	<!-- 댓글 삭제  -->
+	<script type="text/javascript">
+		function delCo(CoNum) {
+			var del1 = confirm('글을 정말 삭제하시겠습니까?');
+				if (del1) {
+					alert('글이 삭제되었습니다.');
+					location.href="DeleteComment.jsp?ad_CoNum=" + CoNum;
+			}
+		} //삭제 func end
+	</script>  
 	
 	<h3>게시글</h3>
 	<hr color="red">
@@ -164,19 +188,40 @@
 <hr color="red">
 		<!-- 아래에는 댓글창 들어갈 화면  -->
 		<h4>댓글</h4>
+		
+		<% if(id != null)  {%>
 		<hr>
 		<input id="comment" placeholder="댓글을 입력하세요." style="width: 300px; height: 50px;"><br> <!-- 입력창 id = comment -->
 		<button id="bt1">댓글달기</button> <br>													 <!-- 버튼 id = bt1 -->
 		<hr>
+		<%} %>
 		<!--  아래댓글 목록  -->
-		<div id="commentList">																	<!-- 댓글목록 id = commentList -->
+		<div id="commentList">	
+																		<!-- 댓글목록 id = commentList -->
 			<% for(CommentDTO dto3 : list) { %>
-		- <%= dto3.getAd_Content() %> ,  작성자 : <%=dto3.getAd_Writer() %> <br>
-			
+			<table>
+			<tr>
+				<td><%= dto3.getAd_Writer() %></td>
+				<td style="font-size: 12px;"><%= dto3.getAd_Time() %></td>
+			</tr>
+			<tr>
+				<td><%= dto3.getAd_Content() %></td>
+			</tr>
+< 				<tr>
+					<% if(dto3.getAd_Writer().equals(id)) {  %>
+				<td align="right"> 
+					
+					
+					 <input type="button" value="댓글삭제" onclick=delCo(<%= dto3.getAd_CoNum() %>) style="color: red;">
+					 <!-- <input type="button" value="댓글 수정" > -->  
+				</td>
+					<%}%>
+				</tr>
+ 			</table>
+			<hr>
 			<%} %>
-		
+			
+			
 		</div>
-		
-		
 </body>
 </html>

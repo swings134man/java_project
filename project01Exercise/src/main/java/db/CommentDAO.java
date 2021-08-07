@@ -35,11 +35,12 @@ public class CommentDAO {
 		int result = 0;
 		try {
 
-			String sql = "insert into ADReply values (null ,?, ?, ? )";
+			String sql = "insert into ADReply values (null ,?, ?, ?, ?)";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, dto.getAd_Content());
 			ps.setInt(2, dto.getAd_FoodNum());
 			ps.setString(3, dto.getAd_Writer());
+			ps.setString(4, dto.getAd_Time());
 			
 			System.out.println("3. sql문 생성 성공!!!");
 			result = ps.executeUpdate();
@@ -53,15 +54,15 @@ public class CommentDAO {
 		return result;
 	}// create end
 
-	public int delete(ADFoodDTO dto) throws Exception {
+	public int delete(CommentDTO dto) throws Exception {
 		int result = 0;
 		try {
-			String sql = "delete from ADFood where ad_Writer = ?";
+			String sql = "delete from ADReply where ad_CoNum = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, dto.getAd_Writer()); // 추후 글을 작성한 본인만 삭제 권한.
+			ps.setInt(1, dto.getAd_CoNum()); // 추후 글을 작성한 본인만 삭제 권한.
 			System.out.println("3. sql문 생성 성공!!!");
 			result = ps.executeUpdate();
-			System.out.println("4. sql문 전송 전송");
+			System.out.println("4. sql문(삭제) 전송 성공");
 			System.out.println("SQL문 수행 개수 " + result + "개");
 			System.out.println(result);
 		} catch (SQLException e) { // 2-4단계
@@ -120,6 +121,7 @@ public class CommentDAO {
 				dto2.setAd_Content(rs.getString(2));
 				dto2.setAd_FoodNum(rs.getInt(3));
 				dto2.setAd_Writer(rs.getString(4));
+				dto2.setAd_Time(rs.getString(5));
 			} else {
 				System.out.println("검색 결과가 없음.");
 			}
@@ -149,6 +151,7 @@ public class CommentDAO {
 				dto2.setAd_Content(rs.getString(2));
 				dto2.setAd_FoodNum(rs.getInt(3));
 				dto2.setAd_Writer(rs.getString(4));
+				dto2.setAd_Time(rs.getString(5));
 				System.out.println(dto2);
 				list.add(dto2);
 				System.out.println(list.size());
