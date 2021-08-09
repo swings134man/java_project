@@ -11,7 +11,8 @@
 		String ad_writer = request.getParameter("ad_Writer");
 		ADFoodDTO dto = new ADFoodDTO();
 			dto.setAd_Writer(ad_writer);
-		ADFoodDAO dao = new ADFoodDAO();
+		
+			ADFoodDAO dao = new ADFoodDAO();
 			ADFoodDTO dto2 = dao.read(dto);
 			
 		// -------------- 댓글 DB ---------------------------	
@@ -53,20 +54,50 @@
 				success: function(result) {
 					if (result == 1) {
 							location.href = "http://localhost:8889/project01Exercise/post.jsp?ad_Writer=<%=dto2.getAd_Writer()%>"
+							/* $('#Con1').attr('style', "display:'';");  //나타내기
+							$('#Con2').attr('style', "display:none;");  //숨기기 */
 						} //if end				
 					} //success end 
 				}) //ajax
-			
-			
-			
-			
-			
 		}) //click end 
 
+		
+		
+		
+		
+		
+		
 			
 	}) //func end 
 </script>
+	<!-- 댓글 수정2  -->
+<%-- <script type="text/javascript">
+<%for(int i = 0; i < list.size(); i++) {%> 
+	
+	$(function() {
+		nuTag = document.getElementById("number");
+		nuValue = nuTag.value;
+		
+	 	 num1 = $('#number').val();
+	 	 
+    	if( <%= i %> == num1 ) {
+		$('.fix_func' + num1).click(function() {
+			console.log(nuValue);
+			console.log(num1);
+			$('.conS'+ num1).attr('style', "display:none;");  // 숨기
+			$('.conH'+ num1).attr('style', "display:'';");  //  나타 
+			$('.conH' + num1).show();  //나타내기
+			$('.conS' + num1).hide();  //숨기기  d
+		}) 
+		}
+		
+	})
 
+
+
+
+ <% }%> 
+</script> --%>
 
 </head>
 <body>
@@ -100,6 +131,18 @@
 			}
 		} //삭제 func end
 	</script>  
+		 <!-- 댓글 수정 -->
+	 <!-- <script type="text/javascript">
+			 function modify(CoNum) {
+				 hi1 = document.getElementById("hidden1");
+				 hi1V= hi1.value; 
+				if (hi1V) {
+				}
+						$('#teV').attr('style', "display:show;");  //td 나타내기
+						$('#teV1').attr('style', "display:'';");  //텍스트 창 나타내기
+						$('#CoV').attr('style', "display:none;");  // 원래 댓글 내용 숨기기
+			}
+		</script>  -->
 	
 	<h3>게시글</h3>
 	<hr color="red">
@@ -197,31 +240,79 @@
 		<%} %>
 		<!--  아래댓글 목록  -->
 		<div id="commentList">	
-																		<!-- 댓글목록 id = commentList -->
-			<% for(CommentDTO dto3 : list) { %>
-			<table>
+					<!-- 댓글 수정 1 -->				<!-- 댓글목록 id = commentList -->
+			 <%-- <% for(CommentDTO dto3 : list) { %>
+			
+				 <table>
 			<tr>
 				<td><%= dto3.getAd_Writer() %></td>
 				<td style="font-size: 12px;"><%= dto3.getAd_Time() %></td>
+				<td> <a id= "comR1" ><%= dto3.getAd_CoNum() %></a>	</td>     <!--  -->
 			</tr>
 			<tr>
-				<td><%= dto3.getAd_Content() %></td>
+				<td id="CoV" colspan="3" style="display: show;"><%= dto3.getAd_Content() %></td>
+				<td id="teV" colspan="3"  style="display: hide;"><textarea id="teV1" style="display: none;" rows="4" cols="30" id="ta1" ></textarea></td>
 			</tr>
 < 				<tr>
 					<% if(dto3.getAd_Writer().equals(id)) {  %>
 				<td align="right"> 
 					
+					<!-- 댓글 수정 버튼 -->
+					<input type="button" value="수정" onclick=modify() >
+					<input type="hidden" id="hidden1" value=<%= dto3.getAd_Content()%> >
+					<!-- <button type="submit" id="mo1">저장</button> -->
+					 <script type="text/javascript">
+					 function modify() {
+						
+						
+						$('#teV').attr('style', "display:show;");  //td 나타내기
+						$('#teV1').attr('style', "display:'';");  //텍스트 창 나타내기
+						$('#CoV').attr('style', "display:none;");  // 원래 댓글 내용 숨기기
+						
+					</script>
 					
 					 <input type="button" value="댓글삭제" onclick=delCo(<%= dto3.getAd_CoNum() %>) style="color: red;">
-					 <!-- <input type="button" value="댓글 수정" > -->  
+										 
 				</td>
 					<%}%>
 				</tr>
  			</table>
 			<hr>
-			<%} %>
+			<%} %> 
+		</div> --%>
+		<!-- 댓글 수정 2 -->
+		<%for(int i = 0; i < list.size(); i++) {%>
 			
-			
+			 <table>
+			<tr>
+				<td> <a id= "num1" ><%= list.get(i).getAd_CoNum() %></a>	</td>     <!--  -->
+				<td><%= list.get(i).getAd_Writer() %></td>
+				<td style="font-size: 12px;"><%= list.get(i).getAd_Time() %></td>
+			</tr>
+			<tr>
+				<td id="Con1<%= i %>" class="conS<%= i %>"	colspan="3" style="display: show;"><%= list.get(i).getAd_Content() %></td>
+				<td id="Con2<%= i %>" class="conH<%= i %>"	colspan="3" style="display: none;"  ><textarea id="Con2"  rows="4" cols="30" id="ta1" ></textarea></td>
+			</tr>
+< 				<tr>
+				
+				<td align="right"> 
+					
+					<!-- 댓글 수정 버튼 -->
+					
+					<input id="fixbt1<%= i %>" class="fix_func<%= i %>"	type="button" value="수정">
+					<input type="hidden" id="number" value="<%= i %>" >
+					<!-- <button type="submit" id="mo1">저장</button> -->
+					
+					
+					 <input type="button" value="댓글삭제" onclick=delCo(<%= list.get(i).getAd_CoNum() %>) style="color: red;">
+										 
+				</td>
+				</tr>
+ 			</table>
+ 			<hr>
+		<%} %>
 		</div>
+		
+		
 </body>
 </html>

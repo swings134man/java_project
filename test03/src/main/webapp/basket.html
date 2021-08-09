@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>basket.html</title>
+<style type="text/css">
+body{
+	background-color: yellow;
+}
+button {
+	background-color: pink;
+	font-size: 15px;
+}
+#bt {
+	background-color: pink;
+	font-size: 15px;
+}
+
+</style>
+<script type="text/javascript">
+	function check() {
+		idTag =  document.getElementById("id");
+		idValue = idTag.value;
+		if (idValue != null) {
+			alert(idValue + '아이디 입력을 확인해습니다!')
+		}
+		
+	}
+
+
+</script>
+</head>
+<body>
+
+<form action="basket2.jsp">
+내 아이디: <input type="text" id="id" name="id">	 <input id="bt" type="button" value="아이디 입력확인" onclick=check()> <br>
+상품 아이디: <input type="text" id="pId" name="pId"> <br>
+상품 가격: <input type="text" id="price" name="price"> <br>
+상품 수량:  <input type="text" id="num" name="num"> <br>
+<button type="submit">장바구니로 저장!</button>
+</form>
+</body>
+</html>

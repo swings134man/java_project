@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+body{
+	background-color: yellow;
+	font-size: 15px;
+	color: blue;
+}
+
+
+
+#hr1 {
+	border-bottom-color: red;
+	width: 1200px;
+}
+
+.bt {
+	font-size: 20px;
+	font-style: normal;
+	color: blue;
+}
+.bt:hover {
+	color: red;
+	font-size: 30px;
+	
+}
+
+h3:hover {
+	background:green;
+	text-decoration: overline;
+	color: white;
+	font-size: 30px;
+}
