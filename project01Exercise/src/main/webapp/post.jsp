@@ -5,6 +5,7 @@
 <%@page import="DTO.ADFoodDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page session="true" %>
 
 	<%
 		// -------------- 페이지 DB ---------------------------
@@ -14,6 +15,7 @@
 		
 			ADFoodDAO dao = new ADFoodDAO();
 			ADFoodDTO dto2 = dao.read(dto);
+			String Writer = dto2.getAd_Writer();		
 			
 		// -------------- 댓글 DB ---------------------------	
 		int	ad_FoodNum = Integer.parseInt(dto2.getAd_Num());   // 페이지 번호(페이지 id)인 num은 string 값이기때문에 DB 넘길떄를 위해 int 변환.
@@ -22,10 +24,17 @@
 		
 		/* 세션 set */
 		String memberId = dto2.getAd_Writer();  // 추후 세션아이디 값 가져올것.
-		int memberBusiness = 1;					// 세션 비지니스 인트값 가져올것.
+//		int memberBusiness = 1;					// 세션 비지니스 인트값 가져올것.
 		String id = "admin";					// 댓글 아이디 --> 세션 
-		//String id = null;
-		int memberBusiness1 = 2;
+		String id2 = "";
+		
+		String tId = (String)session.getAttribute("tId"); //세션 테스트용 아이디
+		String tBu = (String)session.getAttribute("tBu");
+		if(tBu == null) {
+			int tBu1 = Integer.parseInt("0");	
+		}else if(tBu != null) {
+			int tBu1 = Integer.parseInt(tBu);
+		};
 		
 	%>
 <!DOCTYPE html>
@@ -33,8 +42,12 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판 글 페이지</title>
+<link rel="stylesheet" href="css/out.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
+
+
+
 					/* 댓글 기능 func */
 	$(function() {
 		$('#bt1').click(function() {
@@ -48,7 +61,7 @@
 				data: {
 					ad_FoodNum : '<%= ad_FoodNum %>' , 
 					ad_Content : commentM , 
-					ad_Writer : '<%= id %>',
+					ad_Writer : '<%= session.getAttribute("tId") %>' ,
 					ad_Time : ad_Time1 
 				},
 				success: function(result) {
@@ -60,47 +73,75 @@
 					} //success end 
 				}) //ajax
 		}) //click end 
-
-		
-		
-		
-		
-		
-		
-			
-	}) //func end 
-</script>
-	<!-- 댓글 수정2  -->
-<%-- <script type="text/javascript">
-<%for(int i = 0; i < list.size(); i++) {%> 
+	 })	
+	 	
+	/* 아래는 삭제 */
 	
-	$(function() {
-		nuTag = document.getElementById("number");
-		nuValue = nuTag.value;
+		$('#bt2').click(function() {
+			
+			ad_Co = $('#comR1').val();
+			ad_CoNum1 = $('#bt2_1').val();
+			console.log(ad_CoNum1);
+			var confirmD = confirm('댓글을 삭제하시겠습니까?');
+			if (confirmD) {
+				$.ajax({
+					url: "DeleteComment2.jsp",
+					data: {
+						ad_CoNum : ad_CoNum1
+					},
+					success: function(result) {
+						if (result == 1) {
+							location.href = "http://localhost:8889/project01Exercise/post.jsp?ad_Writer=<%=dto2.getAd_Writer()%>"
+						} //if end
+					} // success end
+				}) // ajax end
+				
+			}// if end 
+		}) // click end 
 		
-	 	 num1 = $('#number').val();
-	 	 
-    	if( <%= i %> == num1 ) {
-		$('.fix_func' + num1).click(function() {
-			console.log(nuValue);
-			console.log(num1);
-			$('.conS'+ num1).attr('style', "display:none;");  // 숨기
-			$('.conH'+ num1).attr('style', "display:'';");  //  나타 
-			$('.conH' + num1).show();  //나타내기
-			$('.conS' + num1).hide();  //숨기기  d
-		}) 
-		}
 		
-	})
-
-
-
-
- <% }%> 
-</script> --%>
-
+		/* 댓글 수정 */
+		/* $('#bt3').click(function() {
+				bt3Va = $('#bt3_1').val();
+				console.log(bt3Va);
+				
+				
+			$('#coV').attr('style', "display:none;");
+			$('#teV').attr('style', "display:'';");
+			 */
+			
+		<%--  $(function() {
+   			if ('<%=id1%>' == '<%=dto2.getAd_Writer()%>' || '<%= id1 %>' == "admin") {
+    		  $("#but1").show();
+  			 } else {
+      		$("#but1").hide();
+      
+			   }
+			}) --%>
+			
+	//	})// click end 
+	// }) //func end 
+</script>
 </head>
 <body>
+<div id="total">
+		<div id="top">
+			<jsp:include page="top/top.jsp"></jsp:include><!--html고정되는부분 연결 코드-->
+		</div>
+		<div id="top2">
+			<jsp:include page="top/top2.jsp"></jsp:include>
+		</div>
+		<div id="top3">
+			<jsp:include page="top/top3.jsp"></jsp:include>
+		</div>
+		<div id="top4">
+			<jsp:include page="top/top4.jsp"></jsp:include>
+		</div>
+		<div id="top5"></div>
+
+		<div id="center">
+
+
 	<!-- 추천 메서드 -->
 	<script type="text/javascript">
 		function like1() {
@@ -120,34 +161,23 @@
 					location.href="deleteConfirm.jsp?ad_Writer=" + '<%= dto2.getAd_Writer()%>';
 			}
 		} //삭제 func end
-	</script> 
-	<!-- 댓글 삭제  -->
-	<script type="text/javascript">
-		function delCo(CoNum) {
-			var del1 = confirm('글을 정말 삭제하시겠습니까?');
-				if (del1) {
-					alert('글이 삭제되었습니다.');
-					location.href="DeleteComment.jsp?ad_CoNum=" + CoNum;
-			}
-		} //삭제 func end
-	</script>  
-		 <!-- 댓글 수정 -->
-	 <!-- <script type="text/javascript">
-			 function modify(CoNum) {
-				 hi1 = document.getElementById("hidden1");
-				 hi1V= hi1.value; 
-				if (hi1V) {
+		
+			<!-- 댓글 삭제  -->
+			function delCo(CoNum) {
+				var del1 = confirm('글을 정말 삭제하시겠습니까?');
+					if (del1) {
+						alert('글이 삭제되었습니다.');
+						location.href="DeleteComment.jsp?ad_CoNum=" + CoNum;
 				}
-						$('#teV').attr('style', "display:show;");  //td 나타내기
-						$('#teV1').attr('style', "display:'';");  //텍스트 창 나타내기
-						$('#CoV').attr('style', "display:none;");  // 원래 댓글 내용 숨기기
-			}
-		</script>  -->
-	
+			}//func end
+			
+			
+		
+	</script> 
 	<h3>게시글</h3>
 	<hr color="red">
 												<!-- 게시판 테이블 디자인 및 배치 수정 해야함  -->
-	<table border="1">
+	<table border="1" style="font-size: 15px; width: 900px;">
 		<tr>
 			<!-- 1번줄 -->
 			<td width="80px">글번호 : <%=dto2.getAd_Num()%></td>
@@ -181,7 +211,6 @@
 			<td colspan="3"><div id="map" style="width:100%;height:250px;">업체 위치</div></td>
 		</tr>
 	</table>
-	
 		
 	 <!-- 지도 ,,, -->
 		<!-- <div id="map" style="width:20%;height:250px;"></div> -->
@@ -213,75 +242,81 @@
 	<button onclick="history.back(1)">back</button>
 											<!-- 세션으로 visible set 버튼 -->
 	<%
-		if((memberId == dto2.getAd_Writer() && memberBusiness == 1) || (id == "admin" && memberBusiness1 == 2)){ 
-	%>
+		if(Writer.equals(tId) || tId.equals("admin") ){ 
+	%> 
 	
-	<!-- <form action="insertU.jsp">
-		<button>글 수정</button>
-	</form> -->
-	
+	<!-- 수정  -->
 	<a href="http://localhost:8889/project01Exercise/insertU.jsp?ad_Writer=<%= dto2.getAd_Writer()%>"><button>수정</button></a>
 			
-	<input type="button" value="글삭제" onclick=del() style="color: red;">
-	<%} %>
+	<input type="button" id="but1" value="글삭제" onclick=del() style="color: red;">
+	 <%} %> 
 	
+	
+	<%
+		if(tId != null ){ 
+	%> 
 	<!-- 추천 -->
-	<input type="button" value="추천~!" onclick=like1()>  <!-- 이거 사용하는 방향으로 갈것 -->
+	<input type="button" id="but1" value="추천~!" onclick=like1()>  <!-- 이거 사용하는 방향으로 갈것 -->
 		
-<hr color="red">
+	 <%} %> 
+		
+		<hr color="red">
 		<!-- 아래에는 댓글창 들어갈 화면  -->
 		<h4>댓글</h4>
 		
-		<% if(id != null)  {%>
+		<% if(tId == null)  {%>
+			<a style="color: red;"> 로그인후 작성가능합니다! </a>
+		<%} else{%>
+		
 		<hr>
 		<input id="comment" placeholder="댓글을 입력하세요." style="width: 300px; height: 50px;"><br> <!-- 입력창 id = comment -->
 		<button id="bt1">댓글달기</button> <br>													 <!-- 버튼 id = bt1 -->
 		<hr>
-		<%} %>
+		
+		<% } %>
 		<!--  아래댓글 목록  -->
 		<div id="commentList">	
-					<!-- 댓글 수정 1 -->				<!-- 댓글목록 id = commentList -->
-			 <%-- <% for(CommentDTO dto3 : list) { %>
+					<!-- 댓글 1번 코드 -->				<!-- 댓글목록 id = commentList -->
+			<% for(CommentDTO dto3 : list) { %>
 			
 				 <table>
 			<tr>
+				<td> <a id= "comR1" ><%= dto3.getAd_CoNum() %></a>	</td>     <!--  -->
 				<td><%= dto3.getAd_Writer() %></td>
 				<td style="font-size: 12px;"><%= dto3.getAd_Time() %></td>
-				<td> <a id= "comR1" ><%= dto3.getAd_CoNum() %></a>	</td>     <!--  -->
 			</tr>
 			<tr>
-				<td id="CoV" colspan="3" style="display: show;"><%= dto3.getAd_Content() %></td>
-				<td id="teV" colspan="3"  style="display: hide;"><textarea id="teV1" style="display: none;" rows="4" cols="30" id="ta1" ></textarea></td>
+				<td id="CoV" colspan="3"  style="display: show;"><%= dto3.getAd_Content() %></td>
+				<td id="teV" colspan="3"  style="display: hide;">
+				<textarea id="teV1" style="display: none;" rows="4" cols="30" id="ta1" ></textarea></td>
 			</tr>
 < 				<tr>
-					<% if(dto3.getAd_Writer().equals(id)) {  %>
+							<!-- comment DAO 안에 저장된 Writer 랑 세션 비교.  -->
+					<% if((dto3.getAd_Writer().equals(tId)) || tId.equals("admin") ) {  %>
 				<td align="right"> 
 					
 					<!-- 댓글 수정 버튼 -->
-					<input type="button" value="수정" onclick=modify() >
-					<input type="hidden" id="hidden1" value=<%= dto3.getAd_Content()%> >
+					<%-- <input type="button" id="bt3" value="수정")>
+					<input type="hidden" id="bt3_1"  value="<%= dto3.getAd_CoNum()  %>" > --%>
 					<!-- <button type="submit" id="mo1">저장</button> -->
-					 <script type="text/javascript">
-					 function modify() {
-						
-						
-						$('#teV').attr('style', "display:show;");  //td 나타내기
-						$('#teV1').attr('style', "display:'';");  //텍스트 창 나타내기
-						$('#CoV').attr('style', "display:none;");  // 원래 댓글 내용 숨기기
-						
-					</script>
 					
-					 <input type="button" value="댓글삭제" onclick=delCo(<%= dto3.getAd_CoNum() %>) style="color: red;">
+					<!-- 삭제 예비  -->		
+					<input type="button" value="댓글삭제" onclick=delCo(<%= dto3.getAd_CoNum()  %>) style="color: red;"> 
+							
 										 
+					<!-- 삭제 -->
+					<<%-- button id="bt2" value="<%= dto3.getAd_CoNum() %>" style="color: red;">삭제</button>
+					<input type="hidden" id="bt2_1" value="<%= dto3.getAd_CoNum()  %>" > --%>
 				</td>
 					<%}%>
 				</tr>
  			</table>
 			<hr>
+			
 			<%} %> 
-		</div> --%>
-		<!-- 댓글 수정 2 -->
-		<%for(int i = 0; i < list.size(); i++) {%>
+		</div> 
+		<!-- 댓글  2번예비코드 -->
+		<%-- <%for(int i = 0; i < list.size(); i++) {%>
 			
 			 <table>
 			<tr>
@@ -290,28 +325,48 @@
 				<td style="font-size: 12px;"><%= list.get(i).getAd_Time() %></td>
 			</tr>
 			<tr>
-				<td id="Con1<%= i %>" class="conS<%= i %>"	colspan="3" style="display: show;"><%= list.get(i).getAd_Content() %></td>
-				<td id="Con2<%= i %>" class="conH<%= i %>"	colspan="3" style="display: none;"  ><textarea id="Con2"  rows="4" cols="30" id="ta1" ></textarea></td>
+				<td id="Con1" value="<%= list.get(i).getAd_CoNum() %>"	colspan="3" style="display: show;"><%= list.get(i).getAd_Content() %></td>
+				<td id="Con2" value="<%= list.get(i).getAd_CoNum() %>" 	colspan="3" style="display: none;"  ><textarea id="Con2"  rows="4" cols="30" ></textarea></td>
 			</tr>
 < 				<tr>
 				
 				<td align="right"> 
 					
 					<!-- 댓글 수정 버튼 -->
+					<input id="bt3"  type="button" value="수정">
+					<input type="hidden" id="bt3_1" value=<%= list.get(i).getAd_CoNum() %> > 
 					
-					<input id="fixbt1<%= i %>" class="fix_func<%= i %>"	type="button" value="수정">
-					<input type="hidden" id="number" value="<%= i %>" >
 					<!-- <button type="submit" id="mo1">저장</button> -->
+					<button id="bt3" value="<%= list.get(i).getAd_CoNum()  %>">댓글 수정</button>
 					
-					
-					 <input type="button" value="댓글삭제" onclick=delCo(<%= list.get(i).getAd_CoNum() %>) style="color: red;">
-										 
+					<button id="bt2" value="<%= list.get(i).getAd_CoNum()  %>" style="color: red;">삭제</button>
+
 				</td>
 				</tr>
  			</table>
  			<hr>
 		<%} %>
+		</div> --%>
+		
 		</div>
+
+		<div id="footer1"></div>
+		
+		<div id="footer2">
+			<h2>고객행복센터</h2><h3>1555-1234 (365고객센터 오전 7시 - 오후 7시)</h3>
+
+		</div>
+		<div id="footer3">
+			법인명 (상호) : 주식회사 옥수수 <span class="bar">I</span> 사업자등록번호 : 111-88-12345<br>
+			통신판매업 : 제 2021-서울종로-0000 호 <span class="bar">I</span> 개인정보보호책임자 : 홍길동
+			<br> 주소 : 서울특별시 종로구 옥수수밭 1, 1층(옥수수동) <span class="bar">I</span>
+			대표이사 : 더조은 <br> 팩스: 070 - 1234 - 0728 <span class="bar">I</span>
+			이메일 : <a href="mailto:2554mj@gmail.com">help@oksusu.com</a> <em
+				class="copy">© OKSUSU CORP. ALL RIGHTS RESERVED</em>
+		</div>
+	</div>
+		
+		
 		
 		
 </body>

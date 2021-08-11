@@ -34,7 +34,7 @@ public class CommentDAO {
 	public int create(CommentDTO dto) throws Exception {
 		int result = 0;
 		try {
-
+			System.out.println(dto);
 			String sql = "insert into ADReply values (null ,?, ?, ?, ?)";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, dto.getAd_Content());
@@ -56,6 +56,7 @@ public class CommentDAO {
 
 	public int delete(CommentDTO dto) throws Exception {
 		int result = 0;
+		System.out.println(dto);
 		try {
 			String sql = "delete from ADReply where ad_CoNum = ?";
 			PreparedStatement ps = con.prepareStatement(sql);

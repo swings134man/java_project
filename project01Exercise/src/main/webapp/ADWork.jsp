@@ -10,7 +10,7 @@
 <body>
 	<div id="total">
 		<div id="top">
-			<jsp:include page="topS.jsp"></jsp:include>
+			<jsp:include page="top/topS.jsp"></jsp:include>
 		</div> <br>
 		
 		<div id="center">
