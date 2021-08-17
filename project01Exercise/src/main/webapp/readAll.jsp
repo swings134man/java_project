@@ -16,13 +16,14 @@ ArrayList<ADFoodDTO> list = dao.read();
 String tId = (String)session.getAttribute("tId");
 String tBu = (String)session.getAttribute("tBu");
 
+
 	
-	//int tBu1 = Integer.parseInt(tBu);
+
 	//int tBu1 = Integer.parseInt(tBu);
 
 
-String memberId = "";
 String memberBusiness = "1";
+String memberId = "";
 
 %>
 <!DOCTYPE html>
@@ -48,7 +49,7 @@ String memberBusiness = "1";
 		</div>
 		<div id="top5"></div>
 
-		<div id="center">
+		<div id="center" style="background-color: white;">
 
 
 
@@ -68,7 +69,7 @@ String memberBusiness = "1";
 		%>
 		<tr>
 			<td><a href="http://localhost:8889/project01Exercise/post.jsp?ad_Writer=<%=dto.getAd_Writer()%>" ><img width="80px" height="80px" src="img/<%= dto.getAd_Img() %>" ></a></td>
-			<td style="text-align: center;"><a href="http://localhost:8889/project01Exercise/post.jsp?ad_Writer=<%=dto.getAd_Writer()%>"> <!-- 가게이름 눌렀을때 이동 --> <%=dto.getAd_Name()%></a></td>
+			<td style="text-align: center;"><a href="http://localhost:8889/project01Exercise/post.jsp?ad_Writer=<%=dto.getAd_Writer()%>"><%=dto.getAd_Name()%></a></td>
 			<td><%= dto.getAd_Title() %> </td>
 			<td style="text-align: center;" ><%=dto.getAd_Recommend()%></td>
 			<td><%=dto.getAd_Writer()%></td>
@@ -84,7 +85,7 @@ String memberBusiness = "1";
 	<br>
 	<!-- 세션 글쓰기 버튼 활성화 부분 -->
 	<%
-		if( tBu != null){
+		if(tBu.equals("1")){
 	%>
 	<form action="insertC.jsp">
 		<button type="submit">글쓰기</button>

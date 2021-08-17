@@ -9,8 +9,8 @@
 
 	<%
 		// -------------- 페이지 DB ---------------------------
-		String ad_writer = request.getParameter("ad_Writer");
-		ADFoodDTO dto = new ADFoodDTO();
+			String ad_writer = request.getParameter("ad_Writer");
+			ADFoodDTO dto = new ADFoodDTO();
 			dto.setAd_Writer(ad_writer);
 		
 			ADFoodDAO dao = new ADFoodDAO();
@@ -28,8 +28,14 @@
 		String id = "admin";					// 댓글 아이디 --> 세션 
 		String id2 = "";
 		
+		
 		String tId = (String)session.getAttribute("tId"); //세션 테스트용 아이디
 		String tBu = (String)session.getAttribute("tBu");
+		
+		if(tId == null) {
+			 tId = "null";	
+		};
+		
 		if(tBu == null) {
 			int tBu1 = Integer.parseInt("0");	
 		}else if(tBu != null) {
@@ -139,7 +145,7 @@
 		</div>
 		<div id="top5"></div>
 
-		<div id="center">
+		<div id="center" style="background-color: white;">
 
 
 	<!-- 추천 메서드 -->
@@ -168,7 +174,7 @@
 					if (del1) {
 						alert('글이 삭제되었습니다.');
 						location.href="DeleteComment.jsp?ad_CoNum=" + CoNum;
-				}
+				};
 			}//func end
 			
 			
@@ -242,18 +248,18 @@
 	<button onclick="history.back(1)">back</button>
 											<!-- 세션으로 visible set 버튼 -->
 	<%
-		if(Writer.equals(tId) || tId.equals("admin") ){ 
+		if( Writer.equals(tId) || tId.equals("admin") ){ 
 	%> 
-	
-	<!-- 수정  -->
-	<a href="http://localhost:8889/project01Exercise/insertU.jsp?ad_Writer=<%= dto2.getAd_Writer()%>"><button>수정</button></a>
+			<a href="http://localhost:8889/project01Exercise/insertU.jsp?ad_Writer=<%= dto2.getAd_Writer()%>">
+			<button>수정</button></a>
 			
-	<input type="button" id="but1" value="글삭제" onclick=del() style="color: red;">
+			<input type="button" id="but1" value="글삭제" onclick=del() style="color: red;">
+	
 	 <%} %> 
 	
-	
+
 	<%
-		if(tId != null ){ 
+		if(tId != "null" ){ 
 	%> 
 	<!-- 추천 -->
 	<input type="button" id="but1" value="추천~!" onclick=like1()>  <!-- 이거 사용하는 방향으로 갈것 -->
@@ -264,7 +270,7 @@
 		<!-- 아래에는 댓글창 들어갈 화면  -->
 		<h4>댓글</h4>
 		
-		<% if(tId == null)  {%>
+		<% if(tId.equals("null"))  {%>
 			<a style="color: red;"> 로그인후 작성가능합니다! </a>
 		<%} else{%>
 		
@@ -295,25 +301,15 @@
 					<% if((dto3.getAd_Writer().equals(tId)) || tId.equals("admin") ) {  %>
 				<td align="right"> 
 					
-					<!-- 댓글 수정 버튼 -->
-					<%-- <input type="button" id="bt3" value="수정")>
-					<input type="hidden" id="bt3_1"  value="<%= dto3.getAd_CoNum()  %>" > --%>
-					<!-- <button type="submit" id="mo1">저장</button> -->
-					
-					<!-- 삭제 예비  -->		
-					<input type="button" value="댓글삭제" onclick=delCo(<%= dto3.getAd_CoNum()  %>) style="color: red;"> 
-							
-										 
-					<!-- 삭제 -->
-					<<%-- button id="bt2" value="<%= dto3.getAd_CoNum() %>" style="color: red;">삭제</button>
-					<input type="hidden" id="bt2_1" value="<%= dto3.getAd_CoNum()  %>" > --%>
+					<!-- 삭제  -->		
+					<input type="button" value="댓글삭제" onclick=delCo(<%= dto3.getAd_CoNum() %>) style="color: red;"> 
 				</td>
-					<%}%>
+					<% } %>
 				</tr>
  			</table>
 			<hr>
 			
-			<%} %> 
+			<% } %> 
 		</div> 
 		<!-- 댓글  2번예비코드 -->
 		<%-- <%for(int i = 0; i < list.size(); i++) {%>
@@ -340,15 +336,18 @@
 					<button id="bt3" value="<%= list.get(i).getAd_CoNum()  %>">댓글 수정</button>
 					
 					<button id="bt2" value="<%= list.get(i).getAd_CoNum()  %>" style="color: red;">삭제</button>
-
+					
+					<!-- 삭제 예비-->
+					<<%-- button id="bt2" value="<%= dto3.getAd_CoNum() %>" style="color: red;">삭제</button>
+					<input type="hidden" id="bt2_1" value="<%= dto3.getAd_CoNum()  %>" > --%>
+<%-- 
 				</td>
 				</tr>
  			</table>
  			<hr>
-		<%} %>
-		</div> --%>
-		
-		</div>
+		<%} %> --%>
+		</div>  <!-- center -->
+		</div> <!-- total -->
 
 		<div id="footer1"></div>
 		

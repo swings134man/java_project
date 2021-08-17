@@ -28,12 +28,10 @@ public class ADFoodDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-
+	} //Constructor end
 	public int create(ADFoodDTO dto) throws Exception {
 		int result = 0;
 		try {
-
 			String sql = "insert into ADFood values (null ,?, ?, ?, ?, ?, ?, ?, 0, ?, ? )";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, dto.getAd_Writer());

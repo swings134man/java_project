@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
-		String ad_writer = request.getParameter("ad_Writer");	// 추후 세션값으로 대체?(연구필요)
+		String ad_writer = request.getParameter("ad_Writer");	
 		
 		ADFoodDTO dto = new ADFoodDTO();
 		dto.setAd_Writer(ad_writer);		

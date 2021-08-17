@@ -97,7 +97,7 @@
 }
 
 #center {
-	background: gray;
+	/* background: gray; */
 	width: 1500px;
 	height: 1500px;
 	position: relative;
@@ -106,7 +106,7 @@
 	font-size: 15px;
 }
 #center1 {
-	background: gray;
+	/* background: gray; */
 	width: 1500px;
 	height: 1500px;
 	position: relative;
@@ -141,40 +141,5 @@
 	color: gray;
 }
 
-/*  */
-/* #center1{
-	width: 1200px;
-	height: 600px;
-	font-size: 10px;
-} */
 
-
-#topS { /* 메뉴바영역 */
-	width: 950px;
-	height: 60px;
-	position: fixed;
-	top: 500px;
-	left: 400px;
-	background-color: yellow;
-}
-#topS:hover { /*마우스올렸을때 효과*/
-	text-decoration: underline;
-}
-
-.tabl {
-	list-style: none;
-	float: left;
-	font-size: 20px;
-	font-weight: BOLD;
-	color: orange;
-	margin: 30px;
-	position: relative;
-}
-.tabl:hover { /*마우스올렸을때 효과*/
-	text-decoration: underline;
-}
-.tab1 {
-	color: #FFBF00;
-	text-decoration: none;
-}
 

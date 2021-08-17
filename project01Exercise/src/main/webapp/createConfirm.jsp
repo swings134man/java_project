@@ -8,7 +8,6 @@
 		ADFoodDAO dao = new ADFoodDAO();
     	ADFoodDTO dto = new ADFoodDTO(); //bag
     	
-    	
     	String ad_Writer = request.getParameter("ad_Writer");
     	String ad_Title = request.getParameter("ad_Title");
     	String ad_Info = request.getParameter("ad_Info");
@@ -22,7 +21,7 @@
     	// 경도,위도 값 float 형변환 
     	float ad_Map_1 = Float.parseFloat(ad_Map_10);
     	float ad_Map_2 = Float.parseFloat(ad_Map_20);
-    	
+    	// DB에 보내기 위해 DTO에 저장.
     	dto.setAd_Writer(ad_Writer);
     	dto.setAd_Title(ad_Title);
     	dto.setAd_Info(ad_Info);

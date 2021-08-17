@@ -79,7 +79,7 @@
 		<div id="top5"></div>
 		
 
-		<div id="center">
+		<div id="center" style="background-color: white;">
 
 		<%-- <div id="topS">
 			<jsp:include page="top/topS.jsp"></jsp:include>
@@ -87,7 +87,7 @@
 		<!-- <div id="total1"> -->
 		<br>
 		<!-- 리스트업 화면 -->
-		<div id="center1">
+		<div id="center1" style="background-color: white;">
 			동네 맛집 정보
 			<!-- 관리자 권한 (관리자만 보임) -->			
 		     <%
@@ -111,7 +111,7 @@
 			<hr color="red">
 			<!-- 동네 맛집랭킹 list up 3개  --> 
 				<h3>동네 맛집 추천!</h3>
-				 <table border="1" style="width: 880px; font-size: 15px;">
+				 <table border="1" style="width: 880px; background-color: white; font-size: 15px;">
 				 <%
 				 for (int i = 0; i < 3; i++  ) {
 						ADFoodDTO dto1 = list.get(i);
