@@ -67,9 +67,6 @@ public class 문제풀기1 {
 				}
 			}
 		}// while
-		
-		
-		
-		
+		sc.close();
 	}// main
 }// class
