@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<result>
+	<item>
+		<rank>
+			<name>kim</name>
+			<tel>010</tel>
+		</rank>
+		<rank>
+			<name>one</name>
+			<tel>011</tel>
+		</rank>
+		<rank>
+			<name>nemo</name>
+			<tel>012</tel>
+		</rank>
+			<rank>
+			<name>asd</name>
+			<tel>013</tel>
+		</rank>
+		<rank>
+			<name>phone</name>
+			<tel>014</tel>
+		</rank>
+		<rank>
+			<name>apsld</name>
+			<tel>015</tel>
+		</rank>
+	</item>
+</result>
